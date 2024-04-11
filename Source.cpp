@@ -1,4 +1,3 @@
-// initilized git commit
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -38,18 +37,27 @@ void displayRun(int values[], int size) {
     cout << endl;
 }
 
+bool hasRun(int values[], int size) {
+    for (int i = 1; i < size; ++i) {
+        // Check if the current value is the same as the previous one
+        if (values[i] == values[i - 1]) {
+            return true; // Found a run
+        }
+    }
+    return false; // No run found
+}
+
 int main() {
     const int size = 20;
     int values[size];
-    generateSequence(values, size);
 
-    cout << "Generated sequence:";
-    for (int i = 0; i < size; ++i) {
-        cout << " " << values[i];
+    bool foundRun = false;
+    while (!foundRun) {
+        generateSequence(values, size);
+        foundRun = hasRun(values, size);
     }
-    cout << endl;
 
-    cout << "Sequence with runs marked:";
+    cout << "Sequence with a run:";
     displayRun(values, size);
 
     return 0;
