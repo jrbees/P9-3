@@ -49,22 +49,33 @@ int main() {
     // Seed the random number generator
     srand(time(NULL));
 
-    // Generate 20 random six-sided die tosses
-    for (i = 0; i < 20; i++) {
-        dieValues[i] = rand() % 6 + 1;
-    }
+    bool runFound = false;
+    int attempts = 0;
 
-    // Print the die values
-    cout << "Die Values: ";
-    for (i = 0; i < 20; i++) {
-        cout << dieValues[i] << " ";
-    }
-    cout << endl;
+    while (!runFound) {
+        attempts++;
+        // Generate 20 random six-sided die tosses
+        for (i = 0; i < 20; i++) {
+            dieValues[i] = rand() % 6 + 1;
+        }
 
-    // Print the die values with runs
-    cout << "With Runs: ";
-    displayRun(dieValues, 20);
-    cout << endl;
+        // Check if the sequence has a run
+        if (hasRun(dieValues, 20)) {
+            runFound = true;
+            // Print the die values
+            cout << "Die Values: ";
+            for (i = 0; i < 20; i++) {
+                cout << dieValues[i] << " ";
+            }
+            cout << endl;
+
+            // Print the die values with runs
+            cout << "With Runs: ";
+            displayRun(dieValues, 20);
+            cout << endl;
+
+        }
+    }
 
     return 0;
 }
